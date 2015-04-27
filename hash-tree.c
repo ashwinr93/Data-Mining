@@ -4,10 +4,10 @@
 #include "utils.h"
 
 #define MIN_SUPPORT 0.05
-#define MIN_CONF 0.45
-#define DATA_FILE "processed.data"
+#define MIN_CONF 0.80
+#define DATA_FILE "inputHash.txt"
 #define MAX_NODE_SIZE 2
-#define TXNS 12960
+#define TXNS 1728
 
 struct _ItemSet
 {
@@ -174,8 +174,8 @@ void print_tree(TreeNode *root)
 
 ItemSetNode *get_frequent_one_itemsets(void)
 {
-  const char* item[] = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x"};
-  int count[24] = {0};
+  const char* item[] = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y"};
+  int count[25] = {0};
 
   FILE *fp = fopen(DATA_FILE, "r");
 
@@ -184,7 +184,7 @@ ItemSetNode *get_frequent_one_itemsets(void)
 
   while ((line = read_line(fp)) != NULL && *line != '\0')
   {
-    for (i = 0; i < 24; i++)
+    for (i = 0; i < 25; i++)
     {
       if (strstr(line, item[i]) != NULL)
       {
@@ -195,7 +195,7 @@ ItemSetNode *get_frequent_one_itemsets(void)
   }
 
   ItemSetNode *list = NULL;
-  for (i = 0; i < 24; i++)
+  for (i = 0; i < 25; i++)
   {
     float support = (float) count[i] / TXNS;
     if (support >= MIN_SUPPORT)
@@ -368,7 +368,7 @@ void apriori(void)
 
   for (l = all_frequent; l != NULL; l = l->next)
   {
-    for (i = 0; i < 128; i++)
+    for (i = 0; i < 256; i++)
       permutations[i] = NULL;
     count = 0;
 
@@ -376,7 +376,7 @@ void apriori(void)
     strcpy(tmp, l->data->item_set);
     
     permute(tmp, 0, strlen(tmp) - 1);
-    for (i = 0; i < 128; i++)
+    for (i = 0; i < 256; i++)
     {
       if (permutations[i] != NULL)
       {
