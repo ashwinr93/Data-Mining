@@ -7,7 +7,7 @@ wssplot <- function(data, nc=15, seed=1234){
                      ylab="Within groups sum of squares")}
 
 
-x<-read.csv("clusterInput.csv",header=TRUE)
+x<-read.csv("inputCluster.csv",header=TRUE)
 a<-x$STG
 b<-x$SCG
 c<-x$STR
