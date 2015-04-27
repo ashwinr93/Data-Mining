@@ -1,4 +1,4 @@
-x<-read.csv("clusterInput.csv",header=TRUE)
+x<-read.csv("inputCluster.csv",header=TRUE)
 a<-x$STG
 b<-x$SCG
 c<-x$STR
